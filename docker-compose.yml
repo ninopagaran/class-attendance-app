@@ -1,0 +1,37 @@
+services:
+  backend:
+    build: ./backend # Build from the backend/ directory
+    ports:
+      - "5000:5000" # Map host port 5000 to container port 5000
+    volumes:
+      - ./backend:/app # Mount the backend code for live reloads during development
+    environment:
+      # These env vars are passed to the Flask app inside the container
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_DEBUG=1 # Enable debug mode for development (auto-reloading)
+      # You might want to pass database connection strings here in a real app
+    # Healthcheck (optional but good practice for production)
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:5000/users"] # Adjust to a suitable endpoint
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+
+  frontend:
+    build: ./frontend # Build from the frontend/ directory
+    ports:
+      - "3000:3000" # Map host port 3000 to container port 3000
+    volumes:
+      - ./frontend:/app # Mount frontend code for live reloads during development
+      - /app/node_modules # Exclude node_modules from host mount to prevent issues
+    environment:
+      # Pass the backend URL to the Next.js app
+      # 'backend' is the service name in docker-compose, resolved to its IP
+      - NEXT_PUBLIC_BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend # Ensure backend starts before frontend
+    # If you implement healthchecks on backend, you can make frontend wait for it
+    # depends_on:
+    #   backend:
+    #     condition: service_healthy
