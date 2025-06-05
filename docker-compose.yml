@@ -34,4 +34,8 @@ services:
     # If you implement healthchecks on backend, you can make frontend wait for it
     # depends_on:
     #   backend:
-    #     condition: service_healthy
+ # Define the named volume
+volumes:
+  attendance_db_volume:
+    # You can specify a driver if needed, but default is usually fine
+    # driver: local   #     condition: service_healthy
