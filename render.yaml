@@ -1,0 +1,52 @@
+databases:
+  - name: attends-128proj-db
+    plan: free
+    databaseName: attends
+    user: attends
+
+services:
+  - type: web
+    name: attends-128proj-backend
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: APP_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: attends-128proj-db
+          property: connectionString
+      - key: ALLOW_SIGNUP
+        value: false
+      - key: SESSION_COOKIE_SECURE
+        value: true
+      - key: SESSION_COOKIE_SAMESITE
+        value: Lax
+      - key: SESSION_LIFETIME_DAYS
+        value: 7
+      - key: MAX_CONTENT_LENGTH_MB
+        value: 5
+      - key: MAX_PROOF_BASE64_CHARS
+        value: 5000000
+
+  - type: web
+    name: attends-128proj-frontend
+    runtime: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start -- --hostname 0.0.0.0 --port $PORT
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: NEXT_PUBLIC_BACKEND_URL
+        value: https://attends-128proj-backend.onrender.com
+      - key: NEXT_PUBLIC_ALLOW_SIGNUP
+        value: false

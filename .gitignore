@@ -1,4 +1,6 @@
 # Docker
 **/node_modules
 **/__pycache__
-
+**/.next
+**/.next*/
+/package-lock.json
