@@ -14,8 +14,8 @@ Set these in `.env` before deploying publicly:
 
 - `SECRET_KEY`: required for stable and secure Flask sessions
 - `DATABASE_URL`: set this to use Postgres in production; if unset, local SQLite is used
-- `ALLOW_SIGNUP=true|false`: backend gate for whether new accounts can be created
-- `NEXT_PUBLIC_ALLOW_SIGNUP=true|false`: frontend gate so the UI matches signup availability
+- `ALLOW_SIGNUP=true|false`: backend boolean for whether new accounts can be created
+- `NEXT_PUBLIC_ALLOW_SIGNUP=true|false`: frontend boolean so the UI matches signup availability
 - `SESSION_COOKIE_SECURE=true`: turn this on behind HTTPS in production
 - `APP_ENV=production`: enables stricter backend expectations
 
@@ -45,3 +45,7 @@ Notes:
 - Render deployment uses Postgres through `DATABASE_URL`
 - Render free web services spin down on idle, so cold starts are expected
 - this setup is suitable for a portfolio demo, not a production-grade public service
+
+# Security Checklist
+
+See [SECURITY_CHECKLIST.md](/home/nino/personal/uni/128proj/SECURITY_CHECKLIST.md) before making the deployment public.

@@ -7,6 +7,7 @@ from functools import wraps
 
 from flask import Flask, g, jsonify, request, session
 from werkzeug.exceptions import RequestEntityTooLarge
+from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import (
     initialize_db,
@@ -78,6 +79,7 @@ app.config.update(
         days=env_int("SESSION_LIFETIME_DAYS", 7)
     ),
 )
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 
 # Initialize the database when the app starts
 with app.app_context():
@@ -130,7 +132,13 @@ def add_security_headers(response):
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
     response.headers.setdefault("X-Frame-Options", "DENY")
     response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    response.headers.setdefault("Cross-Origin-Opener-Policy", "same-origin")
+    response.headers.setdefault("Cross-Origin-Resource-Policy", "same-site")
     response.headers.setdefault("Cache-Control", "no-store")
+    if APP_ENV == "production":
+        response.headers.setdefault(
+            "Strict-Transport-Security", "max-age=31536000"
+        )
     return response
 
 
