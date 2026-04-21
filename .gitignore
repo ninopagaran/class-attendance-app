@@ -4,3 +4,6 @@
 **/.next
 **/.next*/
 /package-lock.json
+
+# Environment secrets
+.env
