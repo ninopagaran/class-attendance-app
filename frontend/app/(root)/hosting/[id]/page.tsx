@@ -9,7 +9,7 @@ import SessionForm from "@/components/SessionForm";
 import CourseForm2 from "@/components/CourseForm2"; // <--- IMPORT YOUR COURSE FORM HERE
 import Header from "@/components/Header";
 import CalendarCard from "@/components/CalendarCard";
-import { CalendarDays, Hash, MapPin, Pencil, TimerReset } from "lucide-react";
+import { CalendarDays, Hash, MapPin, Pencil, Plus, TimerReset } from "lucide-react";
 
 interface Course {
   course_id: number;
@@ -226,23 +226,23 @@ const HostingCourse = () => {
     <div className="w-full min-h-screen">
       <div className="min-h-screen flex flex-col items-center justify-start w-full pb-12">
         <Header title="Hosting" onClick={() => router.push("/hosting")} />
-        <main className="content-wrap flex w-full flex-1 flex-col gap-8 py-8 sm:py-10">
-          <section className="surface-card overflow-hidden p-6 sm:p-8">
+        <main className="content-wrap flex w-full flex-1 flex-col gap-6 py-6 sm:py-8">
+          <section className="surface-card p-6 sm:p-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div className="space-y-3">
-                <span className="paper-badge">Hosted Course</span>
+                <span className="paper-badge">Host view</span>
                 <div className="space-y-2">
                   <h1 className="section-title">{course.name}</h1>
                   <p className="section-copy max-w-2xl">
-                    Manage this course, review its attendance rules, and open a
-                    session to inspect attendance records.
+                    Define the course rules, create sessions, and review the
+                    attendance record for each class.
                   </p>
                 </div>
               </div>
 
               <button
                 type="button"
-                className="inline-flex h-12 items-center gap-2 rounded-full bg-myred px-5 text-sm font-semibold text-white transition hover:bg-[#740000]"
+                className="inline-flex h-10 items-center gap-2 rounded-md bg-blue-600 px-4 text-sm font-medium text-white transition hover:bg-blue-700"
                 onClick={() => setShowCourseForm(true)}
               >
                 <Pencil className="h-4 w-4" />
@@ -252,7 +252,7 @@ const HostingCourse = () => {
 
             <div className="meta-grid mt-8">
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <Hash className="h-4 w-4" />
                   <span className="meta-label">Join Code</span>
                 </div>
@@ -260,7 +260,7 @@ const HostingCourse = () => {
               </div>
 
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <TimerReset className="h-4 w-4" />
                   <span className="meta-label">Late Threshold</span>
                 </div>
@@ -268,7 +268,7 @@ const HostingCourse = () => {
               </div>
 
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <TimerReset className="h-4 w-4" />
                   <span className="meta-label">Present Threshold</span>
                 </div>
@@ -278,7 +278,7 @@ const HostingCourse = () => {
               </div>
 
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <MapPin className="h-4 w-4" />
                   <span className="meta-label">Location Gate</span>
                 </div>
@@ -292,16 +292,15 @@ const HostingCourse = () => {
             </div>
           </section>
 
-          <section className="surface-card p-5 sm:p-7">
+          <section className="surface-card p-5 sm:p-6">
             <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div className="space-y-1">
                 <p className="section-kicker">Sessions</p>
-                <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#211414]">
-                  Attendance windows
+                <h2 className="display-type text-3xl font-semibold tracking-[-0.035em] text-ink">
+                  Sessions
                 </h2>
                 <p className="section-copy">
-                  Each session opens into its own attendance summary and proof
-                  records.
+                  Open a session to review its register and proof records.
                 </p>
               </div>
               <div className="paper-badge inline-flex gap-2">
@@ -313,11 +312,11 @@ const HostingCourse = () => {
             {sessions.length === 0 ? (
               <div className="empty-state">
                 <div className="max-w-md space-y-2">
-                  <h3 className="text-xl font-semibold text-[#241616]">
+                  <h3 className="display-type text-2xl font-semibold text-ink">
                     No sessions yet
                   </h3>
                   <p className="section-copy">
-                    Create the first session for this course to start recording
+                    Create the first session when this course is ready to take
                     attendance.
                   </p>
                 </div>
@@ -342,7 +341,8 @@ const HostingCourse = () => {
           onClick={() => setShowSessionForm(true)}
           aria-label="Create session"
         >
-          <img src="/add.svg" alt="Create New Session" className="w-8 h-8" />
+          <Plus className="h-4 w-4" />
+          <span>New session</span>
         </button>
 
         {/* Conditional Rendering for SessionForm */}

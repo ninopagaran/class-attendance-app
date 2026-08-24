@@ -351,23 +351,23 @@ const AttendingCourse = () => {
           title="Course Details"
           onClick={() => router.push("/attending")}
         />
-        <main className="content-wrap flex w-full flex-1 flex-col gap-8 py-8 sm:py-10">
-          <section className="surface-card overflow-hidden p-6 sm:p-8">
+        <main className="content-wrap flex w-full flex-1 flex-col gap-6 py-6 sm:py-8">
+          <section className="surface-card p-6 sm:p-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div className="space-y-3">
-                <span className="paper-badge">Enrolled Course</span>
+                <span className="paper-badge">Student view</span>
                 <div className="space-y-2">
                   <h1 className="section-title">{course.name}</h1>
                   <p className="section-copy max-w-2xl">
-                    Review the course rules, then open a session to mark your
-                    attendance with proof and location data.
+                    Review the course rules, then open a session when you are
+                    ready to check in.
                   </p>
                 </div>
               </div>
 
               <button
                 type="button"
-                className="inline-flex h-12 items-center rounded-full bg-myred px-5 text-sm font-semibold text-white transition hover:bg-[#740000]"
+                className="inline-flex h-11 items-center rounded-[4px] border border-[#b84c57] bg-[#fffdf8] px-4 text-sm font-bold text-myred transition hover:bg-[#fbede9]"
                 onClick={() => setShowCourseInfo(true)}
               >
                 Unenroll
@@ -376,7 +376,7 @@ const AttendingCourse = () => {
 
             <div className="meta-grid mt-8">
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <Hash className="h-4 w-4" />
                   <span className="meta-label">Join Code</span>
                 </div>
@@ -384,7 +384,7 @@ const AttendingCourse = () => {
               </div>
 
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <TimerReset className="h-4 w-4" />
                   <span className="meta-label">Late Threshold</span>
                 </div>
@@ -392,7 +392,7 @@ const AttendingCourse = () => {
               </div>
 
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <TimerReset className="h-4 w-4" />
                   <span className="meta-label">Present Threshold</span>
                 </div>
@@ -402,7 +402,7 @@ const AttendingCourse = () => {
               </div>
 
               <div className="meta-card">
-                <div className="flex items-center gap-2 text-[#7b4f4f]">
+                <div className="flex items-center gap-2 text-[#516268]">
                   <MapPin className="h-4 w-4" />
                   <span className="meta-label">Location Gate</span>
                 </div>
@@ -416,16 +416,16 @@ const AttendingCourse = () => {
             </div>
           </section>
 
-          <section className="surface-card p-5 sm:p-7">
+          <section className="surface-card p-5 sm:p-6">
             <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div className="space-y-1">
                 <p className="section-kicker">Sessions</p>
-                <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#211414]">
-                  Available attendance windows
+                <h2 className="display-type text-3xl font-semibold tracking-[-0.035em] text-ink">
+                  Sessions
                 </h2>
                 <p className="section-copy">
-                  Open a session to mark attendance or view a session you
-                  already joined.
+                  Open a session to check in, or view a session you have already
+                  joined.
                 </p>
               </div>
               <div className="paper-badge inline-flex gap-2">
@@ -437,8 +437,8 @@ const AttendingCourse = () => {
             {sessions.length === 0 ? (
               <div className="empty-state">
                 <div className="max-w-md space-y-2">
-                  <h3 className="text-xl font-semibold text-[#241616]">
-                    No sessions available yet
+                  <h3 className="display-type text-2xl font-semibold text-ink">
+                    No sessions yet
                   </h3>
                   <p className="section-copy">
                     Check back later when your instructor publishes course

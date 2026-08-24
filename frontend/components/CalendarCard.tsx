@@ -1,31 +1,27 @@
 "use client";
 
-import React from "react";
+import { ArrowUpRight, CalendarDays } from "lucide-react";
 
 interface CardProps {
   title: string;
   onClick?: () => void;
 }
 
-const CalendarCard = ({ title, onClick }: CardProps) => {
+export default function CalendarCard({ title, onClick }: CardProps) {
   return (
     <button
       type="button"
-      className="group surface-card-soft flex min-h-[9.5rem] w-full flex-col overflow-hidden text-left transition duration-200 hover:-translate-y-1 hover:shadow-[0_18px_35px_rgba(55,14,14,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#890000]/20"
       onClick={onClick}
+      className="flex min-h-40 w-full flex-col rounded-lg border border-slate-200 bg-white p-5 text-left transition hover:border-blue-400 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
     >
-      <div className="bg-myred px-4 py-3 text-white">
-        <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/72">
-          Session
-        </span>
+      <div className="flex items-center justify-between text-slate-500">
+        <CalendarDays className="size-5" strokeWidth={1.75} />
+        <ArrowUpRight className="size-4" />
       </div>
-      <div className="flex flex-1 items-center justify-center bg-[#ebe3df] px-5 py-6">
-        <span className="text-center text-lg font-semibold leading-snug tracking-[-0.02em] text-[#231515]">
-          {title}
-        </span>
+      <div className="mt-auto pt-7">
+        <p className="text-xs font-medium text-slate-500">Session</p>
+        <h2 className="mt-2 text-base font-semibold leading-snug text-slate-900">{title}</h2>
       </div>
     </button>
   );
-};
-
-export default CalendarCard;
+}

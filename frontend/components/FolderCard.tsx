@@ -1,33 +1,27 @@
 "use client";
 
-import React from "react";
+import { ArrowUpRight, BookOpen } from "lucide-react";
 
-interface TitleCardProps {
+interface CourseCardProps {
   title: string;
   onClick?: () => void;
 }
 
-const FolderCard = ({ title, onClick }: TitleCardProps) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className="group mx-auto flex w-full max-w-[19rem] cursor-pointer flex-col text-left transition duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#890000]/20"
-  >
-    <div className="ml-5 h-5 w-24 rounded-t-[1rem] border-x-2 border-t-2 border-black bg-myred shadow-[0_8px_18px_rgba(45,3,3,0.12)] transition duration-200 group-hover:translate-x-1" />
-    <div className="-mt-px overflow-hidden rounded-[2rem] rounded-tl-[1.35rem] border-2 border-black bg-white shadow-[0_18px_35px_rgba(31,19,19,0.12)]">
-      <div className="bg-myred px-5 py-4 text-white">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
-          Course
-        </p>
+export default function FolderCard({ title, onClick }: CourseCardProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex min-h-44 w-full flex-col rounded-lg border border-slate-200 bg-white p-5 text-left transition hover:border-blue-400 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+    >
+      <div className="flex items-center justify-between text-slate-500">
+        <BookOpen className="size-5" strokeWidth={1.75} />
+        <ArrowUpRight className="size-4" />
       </div>
-
-      <div className="flex min-h-[8.75rem] items-center justify-center bg-[#ebe3df] px-6 py-8">
-        <p className="text-center text-lg font-bold leading-snug tracking-[-0.02em] break-words text-[#231515]">
-          {title}
-        </p>
+      <div className="mt-auto pt-8">
+        <p className="text-xs font-medium text-slate-500">Course</p>
+        <h2 className="mt-2 text-lg font-semibold text-slate-900">{title}</h2>
       </div>
-    </div>
-  </button>
-);
-
-export default FolderCard;
+    </button>
+  );
+}

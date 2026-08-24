@@ -1,123 +1,77 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { BookOpenCheck, ClipboardPenLine, UserRound } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const Home = () => {
-
+export default function Home() {
   const router = useRouter();
-
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const fetchEmail = async () => {
       try {
-        const response = await fetch('/api/auth/status');
-
+        const response = await fetch("/api/auth/status");
         const data = await response.json();
 
         if (response.ok) {
-          setEmail(data.user.email || "No email found");
-        } else {
-          console.error("Failed to fetch email:", data.message);
-          setEmail("No email found");
+          setEmail(data.user.email || "");
         }
       } catch (error) {
         console.error("Error fetching email:", error);
       }
-    }
+    };
 
     fetchEmail();
   }, []);
 
-
   return (
-    <main className="content-wrap flex min-h-screen w-full flex-col gap-8 py-8 sm:py-10">
-      <section className="brand-panel overflow-hidden px-5 py-6 sm:px-7 sm:py-7">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/70">
-              Dashboard
-            </p>
-            <div className="space-y-1">
-              <h1 className="text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-                Welcome to Attends
-              </h1>
-              <p className="max-w-xl text-sm leading-6 text-white/78 sm:text-base">
-                Choose whether you&apos;re managing a course or joining one,
-                then jump straight into your sessions.
-              </p>
-            </div>
+    <main className="content-wrap min-h-screen py-6 sm:py-8">
+      <section className="rounded-lg bg-blue-600 px-6 py-5 text-white sm:px-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-medium text-blue-100">Welcome to Attends</p>
+            <h1 className="mt-1 text-2xl font-semibold">Choose what you want to do.</h1>
           </div>
-
-          <Button
-            className="h-16 rounded-full border border-[#d8c3bd] bg-[#fff8f5] px-4 text-sm font-semibold text-[#1f1212] shadow-[0_18px_35px_rgba(20,5,5,0.18)] hover:bg-[#f7eded] sm:min-w-[19rem]"
-            onClick={() => router.push('/profile')}
+          <button
+            type="button"
+            onClick={() => router.push("/profile")}
+            className="flex items-center gap-2 self-start rounded-md bg-blue-700 px-3 py-2 text-left text-sm hover:bg-blue-800 sm:self-auto"
           >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-myred shadow-[0_10px_20px_rgba(45,3,3,0.2)]">
-              <img src="/profile.svg" alt="Profile" className="h-5 w-5 shrink-0" />
-            </span>
-            <span className="truncate text-[15px] font-semibold tracking-[-0.01em]">
-              {email || "View Profile"}
-            </span>
-          </Button>
+            <UserRound className="size-4" />
+            <span className="max-w-56 truncate">{email || "View profile"}</span>
+          </button>
         </div>
       </section>
 
-      <section className="surface-card p-5 sm:p-7">
-        <div className="mb-6 space-y-1">
-          <h2 className="section-title text-[1.75rem]">Choose your workspace</h2>
-          <p className="section-copy max-w-2xl">
-            Keep the flow simple: host a course to manage attendance, or join a
-            course you&apos;re taking.
-          </p>
-        </div>
+      <section className="mt-6 rounded-lg border bg-white p-5 sm:p-6">
+        <h2 className="text-xl font-semibold text-slate-900">Dashboard</h2>
+        <p className="mt-1 text-sm text-slate-600">Manage the courses you host or join a course as a student.</p>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="mt-5 grid gap-4 md:grid-cols-2">
           <button
             type="button"
-            onClick={() => router.push('/hosting')}
-            className="group surface-card-soft flex min-h-[15rem] flex-col items-start justify-between p-6 text-left transition duration-200 hover:-translate-y-1 hover:shadow-[0_22px_40px_rgba(55,14,14,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#890000]/20"
+            onClick={() => router.push("/hosting")}
+            className="rounded-lg border border-slate-200 p-5 text-left hover:border-blue-400 hover:bg-blue-50"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-myred shadow-[0_12px_24px_rgba(45,3,3,0.18)]">
-              <img src="/create.svg" alt="Create" className="h-8 w-8" />
-            </div>
-
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold tracking-[-0.02em] text-[#211414]">
-                Hosting
-              </h3>
-              <p className="text-sm leading-6 text-[#665252]">
-                Create courses, generate join codes, and manage attendance from
-                your own course space.
-              </p>
-            </div>
+            <ClipboardPenLine className="size-6 text-blue-600" />
+            <h3 className="mt-4 text-lg font-semibold text-slate-900">Hosting</h3>
+            <p className="mt-1 text-sm leading-6 text-slate-600">Create courses, open sessions, and check attendance records.</p>
+            <span className="mt-4 inline-block text-sm font-medium text-blue-600">Open hosting</span>
           </button>
 
           <button
             type="button"
-            onClick={() => router.push('/attending')}
-            className="group surface-card-soft flex min-h-[15rem] flex-col items-start justify-between p-6 text-left transition duration-200 hover:-translate-y-1 hover:shadow-[0_22px_40px_rgba(55,14,14,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#890000]/20"
+            onClick={() => router.push("/attending")}
+            className="rounded-lg border border-slate-200 p-5 text-left hover:border-blue-400 hover:bg-blue-50"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-myred shadow-[0_12px_24px_rgba(45,3,3,0.18)]">
-              <img src="/enter.svg" alt="Enter" className="h-8 w-8" />
-            </div>
-
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold tracking-[-0.02em] text-[#211414]">
-                Attending
-              </h3>
-              <p className="text-sm leading-6 text-[#665252]">
-                Join a course with a code and keep your classes and sessions in
-                one place.
-              </p>
-            </div>
+            <BookOpenCheck className="size-6 text-blue-600" />
+            <h3 className="mt-4 text-lg font-semibold text-slate-900">Attending</h3>
+            <p className="mt-1 text-sm leading-6 text-slate-600">Join a course and submit attendance for its sessions.</p>
+            <span className="mt-4 inline-block text-sm font-medium text-blue-600">Open attending</span>
           </button>
         </div>
       </section>
     </main>
-  )
+  );
 }
-
-export default Home

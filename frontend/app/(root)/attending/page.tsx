@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import JoinCourse from "@/components/JoinCourse";
 import Header from "@/components/Header";
 import FolderCard from "@/components/FolderCard";
+import { Plus } from "lucide-react";
 
 interface CourseEnrollment {
   enrollment_id: number;
@@ -128,27 +129,26 @@ const Attending = () => {
       <div className="min-h-screen flex flex-col items-center justify-start w-full pb-12">
         <Header title="Attending" onClick={() => router.push("/home")} />
 
-        <main className="content-wrap flex w-full flex-1 flex-col gap-8 py-8 sm:py-10">
-          <section className="surface-card p-5 sm:p-7">
-            <div className="space-y-2">
-              <h1 className="section-title">Courses you&apos;re attending</h1>
-              <p className="section-copy max-w-2xl">
-                Open a course to check your enrolled classes and keep track of
-                attendance activity.
-              </p>
-            </div>
+        <main className="content-wrap flex w-full flex-1 flex-col gap-6 py-6 sm:py-8">
+          <section className="surface-card p-6 sm:p-8">
+            <p className="section-kicker">Student view</p>
+            <h1 className="section-title mt-2">Courses you attend</h1>
+            <p className="section-copy mt-3 max-w-2xl">
+              Join a course with its code, then open its sessions when it is time
+              to record your attendance.
+            </p>
           </section>
 
-          <section className="surface-card p-5 sm:p-7">
+          <section className="surface-card p-5 sm:p-6">
             {courses.length === 0 ? (
               <div className="surface-card-soft flex min-h-[16rem] items-center justify-center px-6 text-center">
                 <div className="max-w-md space-y-2">
-                  <h2 className="text-xl font-semibold text-[#241616]">
+                  <h2 className="display-type text-2xl font-semibold text-ink">
                     No courses yet
                   </h2>
-                  <p className="text-sm leading-6 text-[#6a5555]">
-                    You&apos;re not attending any courses right now. Use the
-                    add button to join one with a course code.
+                  <p className="section-copy mt-2">
+                    Join a course with the code shared by your host. It will show
+                    up here with its sessions.
                   </p>
                 </div>
               </div>
@@ -172,7 +172,8 @@ const Attending = () => {
           onClick={() => setShowJoinForm(true)}
           aria-label="Join course"
         >
-          <img src="/add.svg" alt="Join Course" className="w-8 h-8" />
+          <Plus className="h-4 w-4" />
+          <span>Join course</span>
         </button>
 
         {showJoinForm && (

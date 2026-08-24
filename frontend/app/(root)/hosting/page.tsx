@@ -8,6 +8,7 @@ import { useAuth } from "@/contexts/AuthContext"; // Import useAuth
 import CourseForm from "@/components/CourseForm";
 import Header from "@/components/Header"; // Import your headers component
 import FolderCard from "@/components/FolderCard";
+import { Plus } from "lucide-react";
 
 // Remove the mock data import
 // import { coursesSample } from "@/content/data";
@@ -112,27 +113,26 @@ const Hosting = () => {
       <div className="min-h-screen flex flex-col items-center justify-start w-full pb-12">
         <Header title="Hosting" onClick={() => router.push("/home")} />
 
-        <main className="content-wrap flex w-full flex-1 flex-col gap-8 py-8 sm:py-10">
-          <section className="surface-card p-5 sm:p-7">
-            <div className="space-y-2">
-              <h1 className="section-title">Courses you&apos;re hosting</h1>
-              <p className="section-copy max-w-2xl">
-                Create and manage your courses here, then open a course to work
-                with sessions and attendance records.
-              </p>
-            </div>
+        <main className="content-wrap flex w-full flex-1 flex-col gap-6 py-6 sm:py-8">
+          <section className="surface-card p-6 sm:p-8">
+            <p className="section-kicker">Host view</p>
+            <h1 className="section-title mt-2">Courses you run</h1>
+            <p className="section-copy mt-3 max-w-2xl">
+              Set the attendance rules, create class sessions, and review each
+              course record from here.
+            </p>
           </section>
 
-          <section className="surface-card p-5 sm:p-7">
+          <section className="surface-card p-5 sm:p-6">
             {courses.length === 0 ? (
               <div className="surface-card-soft flex min-h-[16rem] items-center justify-center px-6 text-center">
                 <div className="max-w-md space-y-2">
-                  <h2 className="text-xl font-semibold text-[#241616]">
-                    No hosted courses yet
+                  <h2 className="display-type text-2xl font-semibold text-ink">
+                    No courses yet
                   </h2>
-                  <p className="text-sm leading-6 text-[#6a5555]">
-                    Start by creating a course. Your hosted classes will appear
-                    here once they&apos;re ready.
+                  <p className="section-copy mt-2">
+                    Create your first course to begin setting attendance rules and
+                    opening sessions.
                   </p>
                 </div>
               </div>
@@ -156,7 +156,8 @@ const Hosting = () => {
           onClick={() => setShowForm(true)}
           aria-label="Create course"
         >
-          <img src="/add.svg" alt="Create New Course" className="w-8 h-8" />
+          <Plus className="h-4 w-4" />
+          <span>New course</span>
         </button>
 
         {showForm && (

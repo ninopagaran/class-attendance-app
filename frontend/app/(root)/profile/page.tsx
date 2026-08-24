@@ -222,48 +222,49 @@ const Profile = () => {
     <div className="min-h-screen flex flex-col items-center justify-start w-full">
       <Header title="Profile" onClick={() => router.back()} />
 
-      <main className="content-wrap flex w-full flex-1 flex-col gap-6 py-8 sm:py-10">
+      <main className="content-wrap flex w-full flex-1 flex-col gap-6 py-6 sm:py-8">
         <section className="surface-card flex flex-col items-center gap-5 px-6 py-8 text-center sm:px-8 sm:py-10">
-          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#f0e4e0] text-4xl font-bold text-myred shadow-[0_16px_32px_rgba(55,14,14,0.08)]">
+          <div className="flex h-20 w-20 items-center justify-center border border-[#bfc9c3] bg-[#e4eae5] text-3xl font-bold text-myred">
             {name.charAt(0).toUpperCase()}
           </div>
           <div className="space-y-1">
+            <p className="section-kicker">Account</p>
             <h1 className="section-title">{name}</h1>
             <p className="section-copy">{email}</p>
           </div>
         </section>
 
-        <section className="surface-card p-5 sm:p-7">
+        <section className="surface-card p-5 sm:p-6">
           <div className="space-y-1">
-            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#211414]">
+            <h2 className="display-type text-3xl font-semibold tracking-[-0.035em] text-ink">
               Account actions
             </h2>
             <p className="section-copy">
-              Update your account details, or manage account removal if needed.
+              Edit your details or remove this account if you no longer need it.
             </p>
           </div>
 
-          <div className="mt-6 flex flex-col gap-4">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <Button
-              className="h-14 w-full rounded-[1.4rem] bg-myred px-6 text-base font-medium hover:bg-[#730000]"
+              className="h-10 w-full rounded-md bg-blue-600 px-4 text-sm font-medium hover:bg-blue-700"
               onClick={() => setShowUpdateDetailsForm(true)}
             >
-              Update Details
+              Edit details
             </Button>
 
             <Button
-              className="h-14 w-full rounded-[1.4rem] bg-red-600 px-6 text-base font-medium text-white hover:bg-red-700"
+              className="h-11 w-full rounded-[4px] bg-red-700 px-5 text-sm font-bold text-white hover:bg-red-800"
               onClick={() => setShowDeleteUserForm(true)}
             >
-              Delete User
+              Delete account
             </Button>
           </div>
         </section>
 
-        <section className="surface-card p-5 sm:p-7">
+        <section className="surface-card p-5 sm:p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#211414]">
+              <h2 className="display-type text-3xl font-semibold tracking-[-0.035em] text-ink">
                 Session
               </h2>
               <p className="section-copy">
@@ -272,10 +273,10 @@ const Profile = () => {
             </div>
 
             <Button
-              className="h-14 rounded-full bg-myred px-8 text-base font-medium hover:bg-[#730000]"
+              className="h-10 rounded-md bg-blue-600 px-4 text-sm font-medium hover:bg-blue-700"
               onClick={handleLogout}
             >
-              Log Out
+              Sign out
             </Button>
           </div>
         </section>
